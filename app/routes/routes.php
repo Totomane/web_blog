@@ -1,16 +1,21 @@
 <?php
 declare(strict_types=1);
-require 'controllers/PageController.php';
+require __DIR__ . '/../controllers/PageController.php';
 
 $routes = [
     'home' => 'home',
     'about' => 'about',
     'contact' => 'contact',
     'project' => 'project',
+    'create' => 'create',
+    'login' => 'login',
+    'register' => 'register',
+    'logout' => 'logout',
+    'delete_project' => 'delete_project',
 ];
 
 $action = $_GET['action'] ?? 'home';
-$id = isset($_GET['id']) ? (int)$_GET['id'] : null;
+$id = isset($_GET['id']) ? (int) $_GET['id'] : null;
 
 $controller = new PageController();
 
