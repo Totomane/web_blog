@@ -41,6 +41,7 @@ class PageController
     public function project($id)
     {
         $project = Project::getById($id);
+        $prevNext = Project::getPrevNext($id);
         require __DIR__ . '/../views/project.php';
     }
 

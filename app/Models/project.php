@@ -154,4 +154,33 @@ class Project
             return false;
         }
     }
+
+    public static function getPrevNext($currentId)
+    {
+        $pdo = self::getConnection();
+        if ($pdo === null) {
+            return ['prev' => null, 'next' => null];
+        }
+        try {
+            // Next project (newer/larger ID)
+            $sqlNext = 'SELECT id FROM projects WHERE id > ? ORDER BY id ASC LIMIT 1';
+            $stmtNext = $pdo->prepare($sqlNext);
+            $stmtNext->execute([$currentId]);
+            $next = $stmtNext->fetchColumn();
+
+            // Prev project (older/smaller ID)
+            $sqlPrev = 'SELECT id FROM projects WHERE id < ? ORDER BY id DESC LIMIT 1';
+            $stmtPrev = $pdo->prepare($sqlPrev);
+            $stmtPrev->execute([$currentId]);
+            $prev = $stmtPrev->fetchColumn();
+
+            return [
+                'prev' => $prev ?: null,
+                'next' => $next ?: null
+            ];
+        } catch (PDOException $e) {
+            return ['prev' => null, 'next' => null];
+        }
+    }
 }
+
