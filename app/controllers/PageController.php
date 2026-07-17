@@ -12,6 +12,23 @@ class PageController
         require __DIR__ . '/../views/home.php';
     }
 
+    public function choice()
+    {
+        require __DIR__ . '/../views/choice.php';
+    }
+
+    public function admin()
+    {
+        require __DIR__ . '/../views/home.php';
+    }
+
+    public function projects()
+    {
+        $category = $_GET['category'] ?? null;
+        $projects = Project::getAll($category);
+        require __DIR__ . '/../views/projects.php';
+    }
+
     public function about()
     {
         require __DIR__ . '/../views/about.php';
@@ -151,13 +168,12 @@ class PageController
                 if (session_status() !== PHP_SESSION_ACTIVE)
                     session_start();
                 $_SESSION['auth_error'] = 'Email ou mot de passe invalide';
-                header('Location: index.php?action=home');
+                header('Location: index.php?action=admin');
                 exit;
             }
         }
 
-
-        header('Location: index.php?action=home');
+        header('Location: index.php?action=admin');
         exit;
     }
 
@@ -202,10 +218,10 @@ class PageController
             if (session_status() !== PHP_SESSION_ACTIVE)
                 session_start();
             $_SESSION['auth_errors'] = $errors;
-            header('Location: index.php?action=home');
+            header('Location: index.php?action=admin');
             exit;
         }
-        header('Location: index.php?action=home');
+        header('Location: index.php?action=admin');
         exit;
     }
     public function logout()

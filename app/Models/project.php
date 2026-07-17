@@ -19,21 +19,32 @@ class Project
         }
     }
 
-    public static function getAll()
+    public static function getAll($category = null)
     {
         $pdo = self::getConnection();
         if ($pdo === null)
             return [];
 
         try {
-            $sql = 'SELECT p.*, (
-                        SELECT pi.image_path FROM project_images pi
-                        WHERE pi.project_id = p.id
-                        ORDER BY pi.id ASC LIMIT 1
-                    ) as main_image_path FROM projects p ORDER BY p.created_at DESC';
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll();
+            if ($category) {
+                $sql = 'SELECT p.*, (
+                            SELECT pi.image_path FROM project_images pi
+                            WHERE pi.project_id = p.id
+                            ORDER BY pi.id ASC LIMIT 1
+                        ) as main_image_path FROM projects p WHERE p.category = ? ORDER BY p.created_at DESC';
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$category]);
+                return $stmt->fetchAll();
+            } else {
+                $sql = 'SELECT p.*, (
+                            SELECT pi.image_path FROM project_images pi
+                            WHERE pi.project_id = p.id
+                            ORDER BY pi.id ASC LIMIT 1
+                        ) as main_image_path FROM projects p ORDER BY p.created_at DESC';
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute();
+                return $stmt->fetchAll();
+            }
         } catch (PDOException $e) {
             return [];
         }

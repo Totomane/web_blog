@@ -1,15 +1,12 @@
 <?php
 require_once __DIR__ . '/layout/header.php';
 ?>
-
 <div class="min-h-screen bg-black text-white py-8 pb-20">
     <div class="max-w-2xl mx-auto px-6">
-
         <div class="mb-8">
             <h1 class="text-4xl font-bold tracking-widest mb-2">CRÉER UN PROJET</h1>
             <div class="w-20 h-1 bg-white"></div>
         </div>
-
         <?php if (!empty($errors)): ?>
             <div class="bg-red-900 border border-red-700 text-red-100 px-6 py-4 rounded-lg mb-6">
                 <h3 class="font-semibold mb-2">Erreurs :</h3>

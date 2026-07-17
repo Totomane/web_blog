@@ -1,5 +1,4 @@
 <?php
-
 class Image
 {
     private static function getConnection()
@@ -17,7 +16,6 @@ class Image
             return null;
         }
     }
-
     public static function create(string $path, string $alt = '')
     {
         $pdo = self::getConnection();

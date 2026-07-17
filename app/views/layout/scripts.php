@@ -1,11 +1,9 @@
 <script>
-// Page Load Animation
+// Animition de la nasa d'elon musk
 window.addEventListener("load", function() {
     setTimeout(function() {
         const loader = document.getElementById("loader");
-        const content = document.getElementById("content");
-        
-        // Start fade out animation
+        const content = document.getElementById("content");      
         if (loader) {
             loader.classList.add("fade-out");
         }
@@ -13,19 +11,15 @@ window.addEventListener("load", function() {
         if (content) {
             content.classList.remove("opacity-0");
         }
-        
-        // Remove loader completely after animation
         setTimeout(() => {
             if (loader) {
                 loader.style.display = 'none';
             }
         }, 1500);
         
-        // Ensure loader is removed promptly and do not stagger-show elements.
         setTimeout(() => {
             const loaderEl = document.getElementById('loader');
             if (loaderEl) {
-                // remove from pointer flow immediately so clicks work
                 loaderEl.style.pointerEvents = 'none';
                 loaderEl.style.display = 'none';
             }
@@ -33,7 +27,6 @@ window.addEventListener("load", function() {
     }, 1500);
 });
 
-// Modal Functions
 function openCreateModal() {
     const modal = document.getElementById('createModal');
     if (modal) {
@@ -41,7 +34,6 @@ function openCreateModal() {
         document.body.style.overflow = 'hidden';
     }
 }
-
 function closeCreateModal() {
     const modal = document.getElementById('createModal');
     if (modal) {
@@ -49,10 +41,7 @@ function closeCreateModal() {
         document.body.style.overflow = 'auto';
     }
 }
-
-// Modal Event Listeners
-document.addEventListener('DOMContentLoaded', function() {
-    // Close modal when clicking outside
+document.addEventListener('DOMContentLoaded', function() { // bah la je veux que le modal s'ouvre quand on clique sur le bouton +
     const modal = document.getElementById('createModal');
     if (modal) {
         modal.addEventListener('click', function(e) {
@@ -61,9 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function(e) { // en gros quand on appuie sur la touche escape il ferme le modal
         if (e.key === 'Escape') {
             closeCreateModal();
         }

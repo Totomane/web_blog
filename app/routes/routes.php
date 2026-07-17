@@ -12,6 +12,9 @@ $routes = [
     'register' => 'register',
     'logout' => 'logout',
     'delete_project' => 'delete_project',
+    'projects' => 'projects',
+    'admin' => 'admin',
+    'choice' => 'choice',
 ];
 
 $action = $_GET['action'] ?? 'home';

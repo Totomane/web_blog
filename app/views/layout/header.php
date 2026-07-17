@@ -24,7 +24,7 @@
 <header class="flex justify-between items-center p-6 border-b border-gray-800">
     <div class="flex items-center space-x-6">
         <div class="flex items-center space-x-4">
-            <a href="index.php?action=home" class="text-2xl font-semibold tracking-widest text-white">MS STUDIO</a>
+            <a href="index.php?action=choice" class="text-2xl font-semibold tracking-widest text-white">MS STUDIO</a>
             <span class="text-gray-400 text-sm font-light">Architects</span>
         </div>
     </div>
@@ -34,8 +34,10 @@
             <span class="text-sm text-gray-300">Bonjour, <?= htmlspecialchars($_SESSION['user_name']) ?></span>
             <a href="index.php?action=logout" class="px-3 py-1 border border-gray-600 text-sm rounded hover:bg-gray-800">Logout</a>
         <?php else: ?>
-            <button id="loginBtn" class="px-3 py-1 border border-gray-600 text-sm rounded hover:bg-gray-800">Login</button>
-            <button id="registerBtn" class="px-3 py-1 bg-white text-black text-sm rounded hover:bg-gray-200">Sign up</button>
+            <?php if (isset($_GET['action']) && $_GET['action'] === 'admin'): ?>
+                <button id="loginBtn" class="px-3 py-1 border border-gray-600 text-sm rounded hover:bg-gray-800">Login</button>
+                <button id="registerBtn" class="px-3 py-1 bg-white text-black text-sm rounded hover:bg-gray-200">Sign up</button>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 
@@ -45,13 +47,15 @@
         <div class="w-6 h-0.5 bg-white"></div>
         
         <div class="menu-dropdown absolute right-6 mt-2 w-56 bg-black border border-gray-800 rounded shadow-lg">
-            <a href="index.php?action=home" class="block px-4 py-2 hover:bg-gray-800">Home</a>
+            <a href="index.php?action=choice" class="block px-4 py-2 hover:bg-gray-800">Home</a>
             <a href="index.php?action=projects" class="block px-4 py-2 hover:bg-gray-800">Projects</a>
             <a href="index.php?action=about" class="block px-4 py-2 hover:bg-gray-800">About</a>
             <a href="index.php?action=contact" class="block px-4 py-2 hover:bg-gray-800">Contact</a>
             <?php if (empty($_SESSION['user_name'])): ?>
-                <button onclick="openLoginModal()" class="w-full text-left px-4 py-2 hover:bg-gray-800">Login</button>
-                <button onclick="openRegisterModal()" class="w-full text-left px-4 py-2 hover:bg-gray-800">Sign up</button>
+                <?php if (isset($_GET['action']) && $_GET['action'] === 'admin'): ?>
+                    <button onclick="openLoginModal()" class="w-full text-left px-4 py-2 hover:bg-gray-800">Login</button>
+                    <button onclick="openRegisterModal()" class="w-full text-left px-4 py-2 hover:bg-gray-800">Sign up</button>
+                <?php endif; ?>
             <?php else: ?>
                 <a href="index.php?action=logout" class="block px-4 py-2 hover:bg-gray-800">Logout</a>
             <?php endif; ?>
